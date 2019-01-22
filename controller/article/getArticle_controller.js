@@ -2,7 +2,7 @@
  * 获取列表
  * @type {Connection}
  */
-let _ = require('lodash')
+let _ = require('lodash');
 let DBHelp = require('../../config/DBHelp.js');
 let getArticle = (data, success) =>{
     // SQL 语句
@@ -18,7 +18,6 @@ let getArticle = (data, success) =>{
         }
         counter++
     });
-console.log(SQL)
     // if (data) {
     //     if (data.id) {
     //        SQL = 'SELECT * FROM WEBSITES WHERE id in ('+data.id+')';

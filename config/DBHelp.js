@@ -1,10 +1,10 @@
-let DB_MYSQL = require('mysql');
-let DB_CONFIG = require('../config/dbConfig');
+const DB_MYSQL = require('mysql');
+const DB_CONFIG = require('./DBConfig');
 /**
  * 数据库连接池
  * @type {Pool}
  */
-let pool = DB_MYSQL.createPool({
+const pool = DB_MYSQL.createPool({
     host: DB_CONFIG.database.HOST,
     user: DB_CONFIG.database.USERNAME,
     password: DB_CONFIG.database.PASSWORD,
@@ -17,18 +17,27 @@ let pool = DB_MYSQL.createPool({
  * @param options
  * @param callback
  */
-let query = (sql, options, callback) =>{
-    pool.getConnection((error, connection) =>{
-        if (error) {
-            callback(error, null, null);
-        } else {
-            connection.query(sql, options, (error, results, fields) =>{
-                //释放连接
-                connection.release();
-                //事件驱动回调
-                callback(error, results, fields);
-            });
-        }
-    });
+const DB = (sql, options) =>{
+    options = (options) ? options:{}
+    return new Promise((resolve, reject) => {
+        pool.getConnection((error, connection) => {
+            if (error) {
+                reject(error);
+            } else {
+                connection.query(sql, options, (error, results, fields) => {
+                    //事件驱动回调
+                    if (results){
+                        resolve(results);
+                    }
+                    if (error) {
+                        reject(error)
+                    }
+                    //释放连接
+                    // connection.release();
+                });
+            }
+            pool.releaseConnection(connection);
+        });
+    })
 };
-module.exports=query;
+module.exports = DB;

@@ -5,7 +5,7 @@ const config = {
     database: {
         DATABASE: 'test',
         USERNAME: 'root',
-        PASSWORD: '',
+        PASSWORD: 'summer',
         PORT: '3306',
         HOST: 'localhost',
         insecureAuth : true,

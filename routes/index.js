@@ -17,8 +17,8 @@ router.get('/article/list/get', (request, response, next)=>{
  */
 router.post('/article/list/add', (request, response, next)=>{
   request.body = {
-    name: '物种起源',
-    url: 'http://www.abcdefghigk.aa',
+    name: '测试',
+    url: 'http://www.test.aa',
     alexa: '32',
     country: 'CN'
   }
