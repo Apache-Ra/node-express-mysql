@@ -9,7 +9,7 @@ const DB = require('../../config/DBHelp.js');
  * 返回的状态信息
  */
 const resultData = {code: '', data: '', message:''}
-// 处理数据库操作成功后
+
 const handleResultSuccess = (response, results) =>{
     resultData.code = results.code || null;
     resultData.data = results.data || null;
